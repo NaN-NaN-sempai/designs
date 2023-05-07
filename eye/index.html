@@ -59,6 +59,7 @@
                 linear-gradient(to right top, transparent 20%, var(--color_b)),
                 radial-gradient(var(--color_b), var(--color_bs) 70%),
                 var(--color_b);
+                overflow: hidden;
         }
 
         .specular {
@@ -251,22 +252,22 @@
             <div class="centralized circle blur shadow"></div>
         </div>
 
-        <div class="centralized circle ball"></div>
+        <div class="centralized circle ball">
+            <div class="centralized circle blur irisshadowinball"></div>
 
-        <div class="centralized blur">
-            <div class="centralized circle specular"></div>
-        </div>
+            <div class="centralized circle iris">
+                <div class="centralized circle irisblack"></div>
+            </div>
 
-        <div class="centralized circle blur irisshadowinball"></div>
-        
-        <div class="centralized circle iris">
-            <div class="centralized circle irisblack"></div>
-        </div>
+            <div class="centralized blur">
+                <div class="centralized circle specular"></div>
+            </div>
 
-        <div class="centralized blur">
-            <div class="centralized circle irisspecular"></div>
-            <div class="centralized circle irisspecularborder"></div>
-            <div class="centralized circle irisspecularinnerborder"></div>
+            <div class="centralized blur">
+                <div class="centralized circle irisspecular"></div>
+                <div class="centralized circle irisspecularborder"></div>
+                <div class="centralized circle irisspecularinnerborder"></div>
+            </div>
         </div>
     </div>
 </body>
