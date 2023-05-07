@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --ballSize: 30vh;
+            --ballshadowSize: 30vh;
+            --irissize: 15vh;
+            --irisbSize: 3vh;
+            --blursize: 2px;
+            --color_shadow: rgb(7, 2, 15);
+            --color_b: rgb(194, 194, 194);
+            --color_bs: rgb(24, 24, 24);
+            --color_specular: rgba(255, 255, 255, 0.596);
+            --color_bgd: rgb(58, 57, 71);
+            --color_bgl: grey;
+            --color_im: rgb(43, 16, 0);
+            --color_il: rgb(90, 33, 0);
+            --color_id: rgb(25, 9, 0);
+        }
+        * {
+            border: none;
+            outline: none;
+            margin: 0;
+        }
+        body {
+            overflow: hidden;
+        }
+        .artbox {
+            background: linear-gradient(250deg, var(--color_bgl) , var(--color_bgd));
+            height: 100vh;
+            width: 100vw;
+        }
+        .circle {
+            border-radius: 50%;
+        }
+        .centralized {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+        }
+        .blur {
+            filter: blur(var(--blursize));
+        }
+
+        .ball {
+            width: var(--ballSize);
+            height: var(--ballSize);
+            background: 
+                center / 105% no-repeat url(./iris.png),
+                linear-gradient(to right top, transparent 20%, var(--color_b)),
+                radial-gradient(var(--color_b), var(--color_bs) 70%),
+                var(--color_b);
+        }
+
+        .specular {
+            width: var(--ballSize);
+            height: var(--ballSize);
+            --specular_size: 60%;
+            --specular_width: 6%;
+            background:
+                radial-gradient(
+                    transparent var(--specular_size),
+                    var(--color_specular) var(--specular_size),
+                    var(--color_specular) calc(var(--specular_size) + var(--specular_width)),
+                    transparent calc(var(--specular_size) + var(--specular_width)));
+            clip-path: polygon(
+                50% 50%,
+                
+                56% 0,
+                67% 0,
+                
+                50% 50%,
+
+                70% 0,
+                100% 0,
+                100% 19%,
+                
+                50% 50%,
+                
+                100% 23%,
+                100% 35%,
+                
+                50% 50%,
+                
+                100% 38%,
+                100% 50%);
+            opacity: .7;
+        }
+
+        .iris {
+            width: var(--irissize);
+            height: var(--irissize);
+
+            background: 
+                center / 105% no-repeat url(./iris.png),
+                radial-gradient(transparent 60%, var(--color_id)),
+                
+                linear-gradient(to top right, transparent 16%, var(--color_il) 20%, var(--color_il) 45%, transparent 70%),
+                radial-gradient(var(--color_im) 5%, var(--color_il) 60%, var(--color_id))
+                var(--color_im);
+        }
+
+        .irisblack {
+            width: var(--irisbSize);
+            height: var(--irisbSize);
+            background: 
+                radial-gradient(black 50%, transparent 65%),
+                linear-gradient(to top right, var(--color_il), var(--color_id))
+                ;
+        }
+        .irisshadowinball {
+            
+            width: var(--irissize);
+            height: var(--irissize);
+            background: radial-gradient(var(--color_specular) 10%, var(--color_shadow) 80%);
+            transform: 
+                perspective(500px)
+                translate(42%, -45%);
+            opacity: .2;
+        }
+
+        
+        .irisspecular {
+            width: var(--irissize);
+            height: var(--irissize);
+            --specular_size: 55%;
+            --specular_width: 6%;
+            background:
+                radial-gradient(
+                    transparent var(--specular_size),
+                    var(--color_specular) var(--specular_size),
+                    var(--color_specular) calc(var(--specular_size) + var(--specular_width)),
+                    transparent calc(var(--specular_size) + var(--specular_width)));
+            clip-path: polygon(
+                40% 50%,
+                
+                56% 0,
+                67% 0,
+                
+                50% 50%,
+
+                70% 0,
+                100% 0,
+                100% 19%,
+                
+                50% 50%,
+                
+                100% 23%,
+                100% 60%);
+            opacity: .5;
+        }
+        .irisspecularborder {
+            width: var(--irissize);
+            height: var(--irissize);
+            --specular_size: 60%;
+            --specular_width: .3%;
+            background:
+                radial-gradient(
+                    transparent var(--specular_size),
+                    var(--color_specular) var(--specular_size),
+                    var(--color_specular) calc(var(--specular_size) + var(--specular_width)),
+                    transparent calc(var(--specular_size) + var(--specular_width)));
+            clip-path: polygon(
+                50% 50%,
+                
+                56% 0,
+                67% 0,
+                
+                50% 50%,
+
+                70% 0,
+                100% 0,
+                100% 19%,
+                
+                50% 50%,
+                
+                100% 23%,
+                100% 50%);
+            transform: translate(50%, -50%) rotate(180deg);
+            opacity: .65;
+        }
+        .irisspecularinnerborder {
+            width: var(--irissize);
+            height: var(--irissize);
+            --specular_size: 14%;
+            --specular_width: .5%;
+            background:
+                radial-gradient(
+                    transparent var(--specular_size),
+                    var(--color_specular) var(--specular_size),
+                    var(--color_specular) calc(var(--specular_size) + var(--specular_width)),
+                    transparent calc(var(--specular_size) + var(--specular_width)));
+            clip-path: polygon(
+                50% 50%,
+                
+                56% 0,
+                100% 50%);
+                transform: rotate(180deg) translate(-50%, 50%);
+        }
+
+        .shadow {
+            width: var(--ballshadowSize);
+            height: var(--ballshadowSize);
+            background: var(--color_shadow);
+            transform:
+                perspective(500px)
+                translate(31%, -30%)
+                rotateX(51deg)
+                rotateY(0deg);
+        }
+
+        .irisshadow {
+            width: var(--irissize);
+            height: var(--irissize);
+            background: var(--color_shadow);
+            transform:
+                perspective(500px)
+                translate(-36%, 5%)
+                rotateX(51deg)
+                rotateY(0deg);
+        }
+        .irisrefraction {
+            --reflexlightsize: 13vh;
+            width: var(--reflexlightsize);
+            height: var(--reflexlightsize);
+            background: var(--color_specular);
+            transform:
+                perspective(500px)
+                translate(-50%, 12%)
+                rotateX(51deg)
+                rotateY(0deg);
+            opacity: .3;
+        }
+    </style>
+</head>
+<body>
+    <div class="centralized artbox">
+        <div class="centralized perpectiveorigin" style="opacity: .8;">
+            <div class="centralized circle blur irisshadow"></div>
+            <div class="centralized circle blur irisrefraction"></div>
+            <div class="centralized circle blur shadow"></div>
+        </div>
+
+        <div class="centralized circle ball"></div>
+
+        <div class="centralized blur">
+            <div class="centralized circle specular"></div>
+        </div>
+
+        <div class="centralized circle blur irisshadowinball"></div>
+        
+        <div class="centralized circle iris">
+            <div class="centralized circle irisblack"></div>
+        </div>
+
+        
+        <div class="centralized blur">
+            <div class="centralized circle irisspecular"></div>
+            <div class="centralized circle irisspecularborder"></div>
+            <div class="centralized circle irisspecularinnerborder"></div>
+        </div>
+    </div>
+</body>
+</html>
