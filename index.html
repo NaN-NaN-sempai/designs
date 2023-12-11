@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: black;
+        }
+        * {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Designs:</h2>
+
+    <ul class="list">
+    </ul>
+    
+</body>
+<script>
+    fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/contents/")
+    .then(r=>r.json())
+    .then(list => {
+        list.filter(f=>f.type=="dir").forEach(({name}) => {
+            let li = document.createElement('li');
+
+                let a = document.createElement('a');
+                    a.className = "link";
+                    a.innerHTML = name;
+                    a.href = "./"+name;
+
+                li.append(a);
+            document.querySelector(".list").append(li);
+        })
+    })
+</script>
+</html>

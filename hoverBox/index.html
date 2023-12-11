@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/index.css">
+    <title>Hover Box</title>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Bg just for exemplification</h2>
+
+    <div class="wrapper">
+        <div class="hoverBox">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="--colorOuter: yellow">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="--colorOuter: green; --bgOuter: #00000044;">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="--colorOuter: purple; --borderSize: 15px;">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="
+        --colorOuter: cyan;
+        --borderSize: 3px;
+        --bgSizeOuter: 100px;
+        --bgSizeInner: 100px;
+        --porcOuter: 99%;
+        ">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="
+        --colorOuter: white;
+        --borderSize: 7px;
+        --bgSizeOuter: 200px;
+        --bgSizeInner: 100px;
+        --porcInner: 99%;
+        ">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="
+        --colorOuter: black;
+        --colorInner: cyan;
+        --bgOuter: white;
+        --bgInner: darkblue;
+        --porcOuter: 99%;
+        --porcInner: 50%;
+        ">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+        <div class="hoverBox" style="
+        --colorOuter: white;
+        --colorInner: black;
+        --bgOuter: transparent;
+        --porcOuter: 99%;
+        --porcInner: 50%;
+        ">
+            <div class="inner">
+                <h2 class="title">Lorem Ipsum</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus maiores expedita doloribus, quisquam quas eveniet, labore consequuntur quos praesentium sapiente temporibus accusantium qui autem nostrum natus consequatur, quidem nihil ratione!
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    const setBg = (el) => {
+        addEventListener("mousemove", ({clientX, clientY}) => {
+            let posX = ((clientX - el.getBoundingClientRect().x) / el.offsetWidth) * 100;
+            let posY = ((clientY - el.getBoundingClientRect().y) / el.offsetHeight) * 100;
+
+            el.style.setProperty('--mouseX', posX + '%');
+            el.style.setProperty('--mouseY', posY + '%');
+        });
+    }
+
+    [...document.querySelectorAll(".hoverBox, .hoverBox .inner")].forEach(hoverBox => {
+        setBg(hoverBox);
+    });
+</script>
+</html>

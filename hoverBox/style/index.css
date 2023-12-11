@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url(https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg);
+  background-size: cover;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px;
+}
+.wrapper .hoverBox {
+  --bgSizeOuter: 100px;
+  --bgSizeInner: 150px;
+  --porcOuter: 10%;
+  --porcInner: 0%;
+  --colorOuter: red;
+  --bgOuter: color-mix(in srgb, var(--colorOuter), #000 90%);
+  --colorInner: color-mix(in srgb, var(--colorOuter), #000 50%);
+  --bgInner: var(--bgOuter);
+  background: var(--colorOuter);
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  --mouseX: 0;
+  --mouseY: 0;
+  background: radial-gradient(var(--bgSizeOuter) at var(--mouseX) var(--mouseY), var(--colorOuter) var(--porcOuter), var(--bgOuter));
+  --bordeRadius: 20px;
+  border-radius: var(--bordeRadius);
+  --borderSize: 5px;
+  padding: var(--borderSize);
+}
+.wrapper .hoverBox .inner {
+  background: var(--colorInner);
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  --mouseX: 0;
+  --mouseY: 0;
+  background: radial-gradient(var(--bgSizeInner) at var(--mouseX) var(--mouseY), var(--colorInner) var(--porcInner), var(--bgInner));
+  color: var(--colorOuter);
+  padding: 10px;
+  width: 200px;
+  border-radius: calc(var(--bordeRadius) - var(--borderSize));
+  font-family: sans-serif;
+}
+.wrapper .hoverBox .inner .title {
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+}
