@@ -226,6 +226,61 @@
         '#aa7700', '#996600', '#885500', '#774400', '#663300',
         '#552200', '#441100', '#330000', '#220000', '#110000'
     ];
+    let fileDesc = {
+        html: 'Linguagem de marcação para a construção de páginas web.',
+        css: 'Linguagem para estilizar elementos HTML em páginas web.',
+        scss: 'Extensão do CSS que adiciona funcionalidades como variáveis e aninhamento.',
+        sass: 'Pré-processador CSS que simplifica a escrita de estilos.',
+        js: 'Linguagem de programação amplamente utilizada para desenvolvimento web.',
+        ts: 'Superset do JavaScript que adiciona tipagem estática.',
+        svelte: 'Framework JavaScript para construção de interfaces de usuário eficientes.',
+        jsx: 'Extensão do JavaScript para escrever código React.',
+        tsx: 'Extensão do TypeScript para escrever código React.',
+        vue: 'Framework JavaScript progressivo para construção de interfaces de usuário.',
+        json: 'Formato de dados leve e independente de linguagem de programação.',
+        yaml: 'Linguagem de serialização de dados de fácil leitura.',
+        md: 'Linguagem de marcação para formatação de texto simples.',
+        gitignore: 'Arquivo que especifica padrões de arquivos a serem ignorados pelo Git.',
+        dockerfile: 'Script para construção de imagens de contêineres Docker.',
+        py: 'Linguagem de programação de alto nível, interpretada e de propósito geral.',
+        java: 'Linguagem de programação orientada a objetos amplamente utilizada.',
+        rb: 'Linguagem de programação interpretada e orientada a objetos, conhecida como Ruby.',
+        php: 'Linguagem de script do lado do servidor para desenvolvimento web.',
+        go: 'Linguagem de programação compilada, concorrente e de código aberto.',
+        cpp: 'Linguagem de programação de uso geral que é uma extensão do C.',
+        csharp: 'Linguagem de programação moderna e orientada a objetos da Microsoft.',
+        c: 'Linguagem de programação de baixo nível e procedural.',
+        swift: 'Linguagem de programação desenvolvida pela Apple para iOS e macOS.',
+        kotlin: 'Linguagem de programação moderna e concisa que roda na Máquina Virtual Java (JVM).',
+        shell: 'Linguagem de script para automação de tarefas no sistema operacional.',
+        perl: 'Linguagem de script usada para automação e processamento de texto.',
+        rust: 'Linguagem de programação focada em segurança, desempenho e concorrência.',
+        dart: 'Linguagem de programação desenvolvida pela Google para a criação de aplicativos.',
+        scala: 'Linguagem de programação que combina programação orientada a objetos e funcional.',
+        groovy: 'Linguagem de script dinâmica que roda na Máquina Virtual Java (JVM).',
+        lua: 'Linguagem de script embeddable, leve e rápida.',
+        matlab: 'Ambiente de programação para computação numérica e visualização de dados.',
+        r: 'Linguagem de programação estatística e ambiente de software.',
+        powershell: 'Shell de linha de comando e linguagem de script da Microsoft.',
+        clojure: 'Lispe moderno que roda na Máquina Virtual Java (JVM).',
+        elixir: 'Linguagem funcional concorrente projetada para construir aplicativos escaláveis.',
+        julia: 'Linguagem de programação de alto desempenho para computação técnica e científica.',
+        vhdl: 'Linguagem de descrição de hardware para design de circuitos digitais.',
+        verilog: 'Linguagem de descrição de hardware usada para modelagem de circuitos digitais.',
+        cobol: 'Linguagem de programação de negócios para processamento de dados empresariais.',
+        fortran: 'Linguagem de programação de alto desempenho para computação científica.',
+        ada: 'Linguagem de programação de propósito geral, especialmente usada em sistemas críticos.',
+        racket: 'Linguagem de programação funcional e derivada do Scheme.',
+        ocaml: 'Linguagem de programação funcional, modular e de tipagem estática.',
+        haskell: 'Linguagem de programação funcional pura e de tipagem estática.',
+        fsharp: 'Linguagem de programação funcional para a plataforma .NET.',
+        sql: 'Linguagem de consulta estruturada para gerenciamento de bancos de dados.',
+        graphql: 'Linguagem de consulta para APIs, fornecendo uma alternativa mais eficiente ao REST.',
+        mongodb: 'Banco de dados NoSQL orientado a documentos.',
+        couchdb: 'Banco de dados NoSQL que usa documentos JSON para armazenar dados.',
+        redis: 'Banco de dados em memória de chave-valor.',
+        firebase: 'Plataforma de desenvolvimento para criação de aplicativos móveis e web.'
+    };
 
     function randomColor() {
         const r = Math.floor(Math.random() * colors.length);
@@ -305,7 +360,7 @@
 
                             let span = document.createElement("span");
                                 span.innerHTML = key;
-                                span.title = `${key.toUpperCase()} - ${porc.toFixed(1)}%`;
+                                span.title = `${key.toUpperCase()} - ${porc.toFixed(1)}% - ${fileDesc[key]}`;
                                 span.style.setProperty("--_porc", porc+"%");
                                 span.style.setProperty("--_color", color);
                             graph.append(span);
