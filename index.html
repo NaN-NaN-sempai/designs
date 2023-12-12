@@ -301,7 +301,7 @@
                 f.type != "tree" && // ------------------------------------------------------ not dir
                 f.path != file.path && // --------------------------------------------------- not self
                 f.path.includes(file.path) && // -------------------------------------------- only in this dir
-                !f.path.includes("node_modules") && // -------------------------------------- not node_mules files
+                !f.path.includes("node_modules") && // -------------------------------------- not node_modules files
                 !(f.path.includes("package-lock") || f.path.includes("package.json")) && // - not package json
                 !(f.path.includes("css") && f.path.includes("map")) && // ------------------- not css map
                 !isMedia(f.path.toLowerCase()) // ------------------------------------------- not media
@@ -360,7 +360,7 @@
 
                             let span = document.createElement("span");
                                 span.innerHTML = key;
-                                span.title = `${key.toUpperCase()} - ${porc.toFixed(1)}% - ${fileDesc[key]}`;
+                                span.title = `${key.toUpperCase()} - ${porc.toFixed(1)}% ${fileDesc[key]? "- "+fileDesc[key]: ""}`;
                                 span.style.setProperty("--_porc", porc+"%");
                                 span.style.setProperty("--_color", color);
                             graph.append(span);
