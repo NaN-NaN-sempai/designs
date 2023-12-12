@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+}
+
+.notch {
+  height: 70px;
+  overflow: hidden;
+  background: url(https://images.rawpixel.com/image_600/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXMxMjUtYWtlNzAwNV8yLmpwZw.jpg);
+  background-size: 100%;
+  border-radius: 20px;
+  position: relative;
+  margin: 10%;
+}
+.notch .wrapper {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+.notch .draw {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
+}
+.notch .draw:not(:nth-child(2)) {
+  margin-left: 30px;
+  margin-block: -20px;
+}
+.notch .draw:not(:nth-child(2)) > *:last-child {
+  display: none;
+}
+.notch .draw > * {
+  width: 50px;
+}
+.notch .draw > * > * {
+  stroke-width: 5;
+  fill-rule: evenodd;
+}

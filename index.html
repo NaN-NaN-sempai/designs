@@ -5,37 +5,314 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        :root {
+            --primary: #FFE2B6;
+            --secondary: #FFD39C;
+            --highlight: #E9773C;
+        }
         body {
             background: black;
         }
         * {
-            color: red;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: var(--highlight);
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+            max-height: 100vh;
+
+            & h2 {
+                text-align: center;
+            }
+
+            & ul {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+            }
+
+            & li {
+                margin-block: 5px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+
+                & .graph {
+                    width: 300px;
+                    overflow: hidden;
+                    border-radius: 50px;
+
+                    position: relative;
+
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+
+                    & span {
+                        color: black;
+                        text-align: center;
+                        width: var(--_porc);
+                        padding-block: 2px;
+                        background: var(--_color);
+                    }
+                }
+            }
+        }
+
+        .spinner {
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            position: absolute;
+            z-index: 2;
+
+            & .circle {
+                --_size: 100px;
+                --_color: var(--secondary);
+                width: var(--_size);
+                height: var(--_size);
+
+                position: absolute;
+                top: 50%;
+                right: 50%;
+                transform: translate(50%, -50%) rotate(0deg);
+
+                --_borderSize: 4px;
+                --_border: var(--_borderSize) solid var(--_color);
+                --_borderHide: var(--_borderSize) solid rgba(128, 128, 128, 0.25);
+                border: var(--_borderHide);
+                border-top: var(--_border);
+                border-radius: 50%;
+
+                animation: spin 2s infinite ease-out;
+
+                &:nth-child(2) {
+                    --_size: 80px;
+                    --_color: var(--highlight);
+                    animation-delay: .5s;
+                }
+                &:nth-child(3) {
+                    --_size: 60px;
+                    --_color: var(--primary);
+                    animation-delay: 1s;
+                }
+                &:nth-child(4) {
+                    --_size: 40px;
+                    --_color: var(--highlight);
+                    animation-delay: 1.5s;
+                }
+            }
+
+            &.hide {
+                display: none;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(50%, -50%) rotate(0deg);
+            }
+            50%, to {
+                transform: translate(50%, -50%) rotate(360deg);
+            }            
         }
     </style>
 </head>
+
 <body>
+    <div class="spinner">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
 
-    <h2>Designs:</h2>
+    <div class="content">
+        <h2>Designs:</h2>
 
-    <ul class="list">
-    </ul>
-    
+        <ul class="list">
+            <li> </li>
+        </ul>
+    </div>
 </body>
+
 <script>
-    fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/contents/")
+    let fileColors = {
+        html: '#e34c26',
+        css: '#1572b6',
+        scss: '#c6538c',
+        sass: '#cf649a',
+        js: '#f0db4f',
+        ts: '#007acc',
+        svelte: '#ff3e00',
+        jsx: '#61dafb',
+        tsx: '#61dafb',
+        vue: '#41b883',
+        json: '#292929',
+        yaml: '#8a8a8a',
+        md: '#333333',
+        gitignore: '#f34f29',
+        dockerfile: '#0db7ed',
+        py: '#306998',
+        java: '#5382a1',
+        rb: '#cc342d',
+        php: '#4f5d95',
+        go: '#00add8',
+        cpp: '#f34b7d',
+        csharp: '#178600',
+        c: '#555555',
+        swift: '#ffac45',
+        kotlin: '#4eabcf',
+        shell: '#4e4e4e',
+        perl: '#0298c3',
+        rust: '#dea584',
+        dart: '#00b4ab',
+        scala: '#c22d40',
+        groovy: '#4298b8',
+        lua: '#000080',
+        matlab: '#0076a8',
+        r: '#198ce7',
+        powershell: '#012456',
+        clojure: '#5881d8',
+        elixir: '#6e4a7e',
+        julia: '#a270ba',
+        vhdl: '#4c8cb5',
+        verilog: '#b2b7f8',
+        cobol: '#125685',
+        fortran: '#4d4d4c',
+        ada: '#02f88c',
+        racket: '#3c5caa',
+        ocaml: '#3be133',
+        haskell: '#5e5086',
+        fsharp: '#b845fc',
+        sql: '#e38c00',
+        graphql: '#e535ab',
+        mongodb: '#47a248',
+        couchdb: '#e9954e',
+        redis: '#d82c20',
+        firebase: '#ffcb2b'
+    };
+    let colors = [
+        '#ff6262', '#62ff62', '#6262ff', '#ffff62', '#62ffff', // Cores claras
+        '#ff7e7e', '#7eff7e', '#7e7eff', '#ffff7e', '#7effff',
+        '#ff8c8c', '#8cff8c', '#8c8cff', '#ffff8c', '#8cffff',
+        '#ff9b9b', '#9bff9b', '#9b9bff', '#ffff9b', '#9bffff',
+        '#ffaaa',  '#aaffaa', '#aaaaff', '#ffffaa', '#aaffff',
+        '#ffbdbd', '#bdbdff', '#ffbdbd', '#ffffff', '#bdbdff',
+        '#f5f5f5', '#e5e5e5', '#d5d5d5', '#c5c5c5', '#b5b5b5', // Tons de cinza
+        '#a5a5a5', '#959595', '#858585', '#757575', '#656565',
+        '#555555', '#454545', '#353535', '#252525', '#151515',
+        '#05f5f5', '#05e5e5', '#05d5d5', '#05c5c5', '#05b5b5', // Tons de azul
+        '#05a5a5', '#059595', '#058585', '#057575', '#056565',
+        '#055555', '#054545', '#053535', '#052525', '#051515',
+        '#00ff00', '#00ee00', '#00dd00', '#00cc00', '#00bb00', // Tons de verde
+        '#00aa00', '#009900', '#008800', '#007700', '#006600',
+        '#005500', '#004400', '#003300', '#002200', '#001100',
+        '#ffcc00', '#eebb00', '#ddaa00', '#cc9900', '#bb8800', // Tons de amarelo
+        '#aa7700', '#996600', '#885500', '#774400', '#663300',
+        '#552200', '#441100', '#330000', '#220000', '#110000'
+    ];
+
+    function randomColor() {
+        const r = Math.floor(Math.random() * colors.length);
+        return colors[r];
+    }
+    function isMedia(str) {
+        const reg = /\.(mp3|mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv|jpg|jpeg|png|gif|bmp|tiff)$/i;
+
+        console.log(str, reg.test(str));
+
+        return reg.test(str);
+    }
+    fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/git/trees/main?recursive=1")
     .then(r=>r.json())
-    .then(list => {
-        list.filter(f=>f.type=="dir").forEach(({name}) => {
-            let li = document.createElement('li');
+    .then(list => {        
+        let folders = list.tree.filter(file => file.type == "tree" && !file.path.includes("/"));
 
-                let a = document.createElement('a');
-                    a.className = "link";
-                    a.innerHTML = name;
-                    a.href = "./"+name;
+        let tree = folders.map(file => {
+            let files = list.tree.filter(f =>
+                f.type != "tree" && // ------------------------------------ not dir
+                f.path != file.path && // --------------------------------- not self
+                f.path.includes(file.path) && // -------------------------- only in this dir
+                !f.path.includes("node_modules") && // -------------------- not node_mules files
+                !(f.path.includes("css") && f.path.includes("map")) && // - not css map
+                !isMedia(f.path.toLowerCase()) // --------------------------------------- not media
+            );
 
-                li.append(a);
-            document.querySelector(".list").append(li);
+            let totalSize = 0;
+            let fileList = {}
+
+            files.forEach(f => {
+                let type = f.path.split("/").at(-1)
+                            .split(".").at(-1)
+                            .toLowerCase();
+
+                let {size} = f;
+
+                totalSize += size;
+
+                if(!fileList[type]) fileList[type] = size;
+                else fileList[type] += size;
+            })
+
+            return {
+                dir: file.path,
+                size: totalSize,
+                files: fileList
+            }
+        });
+
+        fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/contents/")
+        .then(r=>r.json())
+        .then(list => {
+            list.filter(f=>f.type=="dir").forEach((item) => {
+                let {name} = item;
+
+                let li = document.createElement('li');
+                    li.id = name;
+
+                    let a = document.createElement('a');
+                        a.className = "link";
+                        a.innerHTML = name;
+                        a.href = "./"+name;
+
+
+                    let dir = tree.find(t=>t.dir==name);
+                    console.log(dir);
+                    let graph = document.createElement("div");
+                        graph.className = "graph";
+                        for(key in dir.files){
+                            let porc = (dir.files[key]/dir.size)*100;
+                            let color = fileColors[key] || randomColor();
+
+                            console.log(color);
+                            let span = document.createElement("span");
+                                span.innerHTML = span.title = key;
+                                span.style.setProperty("--_porc", porc+"%");
+                                span.style.setProperty("--_color", color);
+                            graph.append(span);
+                        }
+
+                    li.append(a, graph);
+                    
+                document.querySelector(".list").append(li);
+
+                document.querySelector(".spinner").classList.add("hide");
+            })
         })
+
+        /* tree.forEach(file => {
+            console.log(document.getElementById(file.dir), file.dir);
+        }); */
     })
 </script>
 </html>

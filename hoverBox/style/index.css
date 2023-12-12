@@ -21,7 +21,7 @@ body {
   --bgSizeInner: 150px;
   --porcOuter: 10%;
   --porcInner: 0%;
-  --colorOuter: red;
+  --colorOuter: #E9773C;
   --bgOuter: color-mix(in srgb, var(--colorOuter), #000 90%);
   --colorInner: color-mix(in srgb, var(--colorOuter), #000 50%);
   --bgInner: var(--bgOuter);
