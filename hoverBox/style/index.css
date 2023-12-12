@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 body {
@@ -51,7 +52,6 @@ body {
   padding: 10px;
   width: 200px;
   border-radius: calc(var(--bordeRadius) - var(--borderSize));
-  font-family: sans-serif;
 }
 .wrapper .hoverBox .inner .title {
   text-transform: uppercase;
@@ -59,8 +59,20 @@ body {
   margin-bottom: 10px;
 }
 .wrapper .hoverBox.horLine {
-  background: linear-gradient(to bottom, var(--bgOuter) calc(var(--mouseY) - var(--porcOuter)), var(--colorOuter), var(--bgOuter) calc(var(--mouseY) + var(--porcOuter)));
+  --direction: bottom;
+  --porcInner: 0%;
+  --pos: var(--mouseY);
+  background: linear-gradient(to var(--direction), var(--bgOuter) calc(var(--pos) - var(--porcOuter)), var(--colorOuter), var(--bgOuter) calc(var(--pos) + var(--porcOuter)));
 }
 .wrapper .hoverBox.horLine .inner {
-  background: linear-gradient(to bottom, var(--bgInner) calc(var(--mouseY) - var(--porcInner)), var(--colorInner), var(--bgInner) calc(var(--mouseY) + var(--porcInner)));
+  background: linear-gradient(to var(--direction), var(--bgInner) calc(var(--pos) - var(--porcInner)), var(--colorInner), var(--bgInner) calc(var(--pos) + var(--porcInner)));
+}
+.wrapper .hoverBox.verLine {
+  --direction: right;
+  --porcInner: 0%;
+  --pos: var(--mouseX);
+  background: linear-gradient(to var(--direction), var(--bgOuter) calc(var(--pos) - var(--porcOuter)), var(--colorOuter), var(--bgOuter) calc(var(--pos) + var(--porcOuter)));
+}
+.wrapper .hoverBox.verLine .inner {
+  background: linear-gradient(to var(--direction), var(--bgInner) calc(var(--pos) - var(--porcInner)), var(--colorInner), var(--bgInner) calc(var(--pos) + var(--porcInner)));
 }

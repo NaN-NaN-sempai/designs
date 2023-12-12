@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
 }
 
 body {
@@ -41,7 +42,7 @@ body {
         --porcOuter: 10%; 
         --porcInner: 0%; 
 
-        --colorOuter: red;
+        --colorOuter: #E9773C;
         --bgOuter: color-mix(in srgb, var(--colorOuter), #000 90%);
 
         --colorInner: color-mix(in srgb, var(--colorOuter), #000 50%);
@@ -64,9 +65,6 @@ body {
             width: 200px;
             
             border-radius: calc(var(--bordeRadius) - var(--borderSize));
-
-            font-family: sans-serif;
-
             .title {
                 text-transform: uppercase;
                 text-align: center;
@@ -76,20 +74,34 @@ body {
 
         
 
-        @mixin horLine($color, $bg, $size, $porc) {
+        @mixin line($color, $bg, $size, $porc, $direction, $pos) {
             background: linear-gradient(
-                to bottom, 
-                $bg calc(var(--mouseY) - $porc),
+                to $direction, 
+                $bg calc($pos - $porc),
                 $color,
-                $bg calc(var(--mouseY) + $porc)
+                $bg calc($pos + $porc)
             );
         }
 
         &.horLine {
-            @include horLine(var(--colorOuter), var(--bgOuter), var(--bgSizeOuter), var(--porcOuter));
+            --direction: bottom;
+            --porcInner: 0%;
+            --pos: var(--mouseY);
+            @include line(var(--colorOuter), var(--bgOuter), var(--bgSizeOuter), var(--porcOuter), var(--direction), var(--pos));
 
             .inner {
-                @include horLine(var(--colorInner), var(--bgInner), var(--bgSizeInner), var(--porcInner));
+                @include line(var(--colorInner), var(--bgInner), var(--bgSizeInner), var(--porcInner), var(--direction), var(--pos));
+            }
+        }
+
+        &.verLine {
+            --direction: right;
+            --porcInner: 0%;
+            --pos: var(--mouseX);
+            @include line(var(--colorOuter), var(--bgOuter), var(--bgSizeOuter), var(--porcOuter), var(--direction), var(--pos));
+
+            .inner {
+                @include line(var(--colorInner), var(--bgInner), var(--bgSizeInner), var(--porcInner), var(--direction), var(--pos));
             }
         }
     }

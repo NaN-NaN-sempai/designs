@@ -58,11 +58,16 @@
                     flex-wrap: nowrap;
 
                     & span {
+                        text-transform: uppercase;
+                        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                        cursor: default;
                         color: black;
                         text-align: center;
                         width: var(--_porc);
                         padding-block: 2px;
                         background: var(--_color);
+                        white-space: nowrap;
+                        padding-inline: 5px;
                     }
                 }
             }
@@ -229,8 +234,6 @@
     function isMedia(str) {
         const reg = /\.(mp3|mp4|avi|mov|wmv|flv|mkv|webm|ogg|ogv|jpg|jpeg|png|gif|bmp|tiff)$/i;
 
-        console.log(str, reg.test(str));
-
         return reg.test(str);
     }
     fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/git/trees/main?recursive=1")
@@ -259,11 +262,15 @@
 
                 let {size} = f;
 
-                totalSize += size;
-
                 if(!fileList[type]) fileList[type] = size;
                 else fileList[type] += size;
-            })
+
+                if((fileList["sass"] || fileList["scss"]) && fileList["css"])
+                    delete fileList["css"];
+            });
+ 
+            for(key in fileList)
+                totalSize += fileList[key];
 
             return {
                 dir: file.path,
@@ -286,18 +293,19 @@
                         a.innerHTML = name;
                         a.href = "./"+name;
 
-
-                    let dir = tree.find(t=>t.dir==name);
-                    console.log(dir);
+                    let dir = tree.find(t=>t.dir==name); 
                     let graph = document.createElement("div");
                         graph.className = "graph";
-                        for(key in dir.files){
+
+                        let entries = Object.entries(dir.files).sort((a, b) => b[1] - a[1]);
+
+                        for([key] of entries){
                             let porc = (dir.files[key]/dir.size)*100;
                             let color = fileColors[key] || randomColor();
 
-                            console.log(color);
                             let span = document.createElement("span");
-                                span.innerHTML = span.title = key;
+                                span.innerHTML = key;
+                                span.title = `${key.toUpperCase()} - ${porc.toFixed(1)}%`;
                                 span.style.setProperty("--_porc", porc+"%");
                                 span.style.setProperty("--_color", color);
                             graph.append(span);
@@ -310,10 +318,6 @@
                 document.querySelector(".spinner").classList.add("hide");
             })
         })
-
-        /* tree.forEach(file => {
-            console.log(document.getElementById(file.dir), file.dir);
-        }); */
     })
 </script>
 </html>
