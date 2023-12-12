@@ -73,6 +73,25 @@ body {
                 margin-bottom: 10px;
             }
         }
+
+        
+
+        @mixin horLine($color, $bg, $size, $porc) {
+            background: linear-gradient(
+                to bottom, 
+                $bg calc(var(--mouseY) - $porc),
+                $color,
+                $bg calc(var(--mouseY) + $porc)
+            );
+        }
+
+        &.horLine {
+            @include horLine(var(--colorOuter), var(--bgOuter), var(--bgSizeOuter), var(--porcOuter));
+
+            .inner {
+                @include horLine(var(--colorInner), var(--bgInner), var(--bgSizeInner), var(--porcInner));
+            }
+        }
     }
 }
 

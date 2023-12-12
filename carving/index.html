@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/styles.css">
+    <title>carving</title>
+</head>
+
+<body>
+    <div class="notch">
+    </div>
+
+    <div class="ref">
+        <h3>This design is based on a furniture on my grandmother's house</h3>
+        
+        <img src="./reference.jpg" alt="reference">
+    </div>
+</body>
+
+<script>
+
+    [...document.querySelectorAll('.notch')].forEach(notch => {
+        let wrapper = document.createElement("div");
+            wrapper.className = "wrapper";
+
+        let draw = document.createElement("div");
+            draw.className = "draw";
+
+        for(let i of [...Array(10).keys()].reverse()) {
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+                svg.setAttribute('class', 'shape');
+                svg.setAttribute('width', '50');
+                svg.setAttribute('height', '50');
+                svg.setAttribute("viewBox", `0 0 100 100`);
+                
+                var shape = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
+                    shape.setAttribute("points", `${i * 10} 50, 50 0, 100 50, 50 100`);
+
+                svg.append(shape);
+            draw.append(svg);
+        }
+
+        for(let i in [...Array(3)])
+            wrapper.append(draw.cloneNode(true))
+
+        notch.append(wrapper)
+        
+    })
+
+</script>
+
+</html>

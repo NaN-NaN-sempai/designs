@@ -58,3 +58,9 @@ body {
   text-align: center;
   margin-bottom: 10px;
 }
+.wrapper .hoverBox.horLine {
+  background: linear-gradient(to bottom, var(--bgOuter) calc(var(--mouseY) - var(--porcOuter)), var(--colorOuter), var(--bgOuter) calc(var(--mouseY) + var(--porcOuter)));
+}
+.wrapper .hoverBox.horLine .inner {
+  background: linear-gradient(to bottom, var(--bgInner) calc(var(--mouseY) - var(--porcInner)), var(--colorInner), var(--bgInner) calc(var(--mouseY) + var(--porcInner)));
+}
