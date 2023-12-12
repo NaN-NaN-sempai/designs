@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            user-select: none;
+            outline: none;
+        }
+        body {
+            background: black;
+        }
+
+        img {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            width: 20%;
+            position: relative; 
+            right: -50%;
+            transform: translateX(-50%);
+            margin-top: 10px;
+        }
+        div {
+            position: relative; 
+            right: -50%;
+            transform: translateX(-50%);
+        }
+
+        #i1 { 
+            animation: shaper 5s cubic-bezier(0.25, 0.98, 0.9,-0.6) infinite;
+        }
+        #i2 {
+            animation: circular 5s infinite;
+        }
+        #i3 {
+            transition: none;
+        }
+        #io1 { 
+            filter: grayscale(100%) brightness(.2) blur(1px);
+        }
+        #io2 {
+            position: absolute;
+            right: 50%;
+            top: 0%;
+            transform: translateX(50%);
+        }
+
+        @keyframes circular {
+            0% {
+                clip-path: circle(40%);
+            }
+            50% {
+                clip-path: circle(10%);
+            }
+            100% {
+                clip-path: circle(40%);
+            }
+        }
+
+        @keyframes shaper {
+            0% {
+                clip-path: polygon(0% 0, 0% 100%, 100% 0);
+            }
+            25% {
+                clip-path: polygon(0% 0, 0% 100%, 100% 100%);
+            }
+            50% {
+                clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+            }
+            75% {
+                clip-path: polygon(100% 0, 0% 0%, 100% 100%);
+            }
+            100% {
+                clip-path: polygon(100% 0, 0% 0%, 0% 100%);
+            }
+        }
+        ::-webkit-scrollbar {
+            opacity: 0;
+            width: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: url(https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg);
+        }
+    </style>
+</head>
+<body>
+    <img id="i1" src="https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg" alt="">
+    <br>
+    <img id="i2" src="https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg" alt="">
+    <br>
+    <img id="i3" src="https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg" alt="">
+    <br>
+    <div>
+        <img id="io1" src="https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg" alt="">
+        <img id="io2" src="https://cache.desktopnexus.com/thumbseg/875/875186-bigthumbnail.jpg" alt="">
+    </div>
+</body>
+<script> 
+    var elarr = ["i3", "io2"];
+    elarr.forEach(id=>{ 
+        var htmlEl = document.getElementById(id);
+        var cssEl = Array.from(document.styleSheets[0].cssRules).find(e=>e.selectorText == "#"+id);
+
+        htmlEl.addEventListener("mousemove", (e)=>{ 
+            var x = ((e.offsetX / i3.clientWidth) * 100) + "%";
+            var y = ((e.offsetY / i3.clientHeight) * 100) + "%";
+            
+            cssEl.style.clipPath = "circle(30% at "+x+" "+y+")";
+        });
+
+        htmlEl.addEventListener("mouseover", ()=>{
+            cssEl.style.transition = "none";
+        });
+
+        htmlEl.addEventListener("mouseout", ()=>{
+            cssEl.style.transition = "1s";
+            cssEl.style.clipPath = "circle(100%)";
+        });
+    })
+</script>
+</html>
