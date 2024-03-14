@@ -151,6 +151,11 @@
 </body>
 
 <script>
+    const repo = "designs";
+    const branch = "main";
+
+
+
     let fileColors = {
         html: '#e34c26',
         css: '#1572b6',
@@ -291,7 +296,7 @@
 
         return reg.test(str);
     }
-    fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/git/trees/main?recursive=1")
+    fetch(`https://api.github.com/repos/NaN-NaN-sempai/${repo}/git/trees/${branch}?recursive=1`)
     .then(r=>r.json())
     .then(list => {        
         let folders = list.tree.filter(file => file.type == "tree" && !file.path.includes("/"));
@@ -334,7 +339,7 @@
             }
         });
 
-        fetch("https://api.github.com/repos/NaN-NaN-sempai/designs/contents/")
+        fetch(`https://api.github.com/repos/NaN-NaN-sempai/${repo}/contents/?ref=${branch}`)
         .then(r=>r.json())
         .then(list => {
             list.filter(f=>f.type=="dir").forEach((item) => {
